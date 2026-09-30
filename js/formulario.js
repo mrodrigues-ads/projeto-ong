@@ -1,0 +1,178 @@
+import { salvarCadastro } from "./armazenamento.js";
+
+function renderizarFormulario(app) {
+    app.innerHTML = `
+        <form id="form">
+            <fieldset>
+                <legend>Dados Pessoais</legend>
+
+                <label for="nome">Nome Completo</label>
+                <input type="text" id="nome" name="nome" pattern="[A-Za-záàãâéêíóôõúçÁÀÃÂÉÊÍÓÔÕÚÇ ]+" required>
+
+                <label for="cpf">CPF</label>
+                <input type="text" id="cpf" name="cpf"  pattern="[0-9]{3}\.[0-9]{3}\.[0-9]{3}-[0-9]{2}" required>
+
+                <label for="email">E-mail</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="telefone">Telefone</label>
+                <input type="tel" id="telefone" name="telefone" pattern="\\([0-9]{2}\\) [0-9]{5}-[0-9]{4}">
+
+                <label for="nascimento">Data de Nascimento</label>
+                <input type="date" id="nascimento" name="nascimento" required>
+            </fieldset>
+
+            <fieldset>
+                <legend>Endereço</legend>
+
+                <label for="cep">CEP</label>
+                <input type="text" id="cep" name="cep" pattern="[0-9]{5}-[0-9]{3}" required>
+
+                <label for="endereco">Endereço</label>
+                <input type="text"  id="endereco" name="endereco" required>
+
+                <label for="residencia">Número da Residência</label>
+                <input type="number" id="residencia" name="residencia" min="1" required>
+
+                <label for="cidade">Cidade</label>
+                <input type="text" id="cidade" name="cidade" pattern="[A-Za-záàãâéêíóôõúçÁÀÃÂÉÊÍÓÔÕÚÇ ]+" required>
+
+                <label for="estado">Estado</label>
+                <select id="estado" name="estado" required>
+                    <option value="">Selecione seu estado</option>
+                    <option value="AC">Acre</option>
+                    <option value="AL">Alagoas</option>
+                    <option value="AP">Amapá</option>
+                    <option value="AM">Amazonas</option>
+                    <option value="BA">Bahia</option>
+                    <option value="CE">Ceará</option>
+                    <option value="DF">Distrito Federal</option>
+                    <option value="ES">Espírito Santo</option>
+                    <option value="GO">Goiás</option>
+                    <option value="MA">Maranhão</option>
+                    <option value="MT">Mato Grosso</option>
+                    <option value="MS">Mato Grosso do Sul</option>
+                    <option value="MG">Minas Gerais</option>
+                    <option value="PA">Pará</option>
+                    <option value="PB">Paraíba</option>
+                    <option value="PR">Paraná</option>
+                    <option value="PE">Pernambuco</option>
+                    <option value="PI">Piauí</option>
+                    <option value="RJ">Rio de Janeiro</option>
+                    <option value="RN">Rio Grande do Norte</option>
+                    <option value="RS">Rio Grande do Sul</option>
+                    <option value="RO">Rondônia</option>
+                    <option value="RR">Roraima</option>
+                    <option value="SC">Santa Catarina</option>
+                    <option value="SP">São Paulo</option>
+                    <option value="SE">Sergipe</option>
+                    <option value="TO">Tocantins</option>
+                </select>
+
+            </fieldset>
+
+            <fieldset>
+                <legend>Participação</legend>
+
+                <label>
+                    <input type="checkbox" id="equipamentos" name="equipamentos">
+                    Doação de equipamentos
+                </label>
+                
+                <label>
+                    <input type="checkbox" id="trabalhoTecnico" name="trabalhoTecnico">
+                    Trabalho voluntário (Técnico/Manutenção)
+                </label>
+
+                <label>
+                    <input type="checkbox" id="trabalhoAulas" name="trabalhoAulas">
+                    Trabalho voluntário (Aulas/Capacitação)
+                </label>
+
+                <label>
+                    <input type="checkbox" id="divulgacao">
+                    Apoio logístico ou divulgação
+                </label>
+                
+                <label>
+                    <input type="checkbox" id="doacao" name="doacao">
+                    Doação financeira
+                </label>
+                
+                <label>
+                    <input type="checkbox" id="parceria" name="parceria">
+                    Parceria corporativa/Empresa
+                </label>
+                
+                <label for="mensagem">Mensagem</label>
+                <textarea id="mensagem" name="mensagem" maxlength="500"></textarea>
+
+            </fieldset>
+
+            <p id="mensagem-feedback"></p>
+
+            <button type="submit">Enviar Cadastro</button>
+
+        </form>
+    
+    `
+};
+
+function configurarEventosFormulario(form) {
+    form.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        const formularioValido = form.checkValidity();
+
+        if (formularioValido) {
+            const dadosCadastro = {
+                nome: document.getElementById("nome").value,
+                cpf: document.getElementById("cpf").value,
+                email: document.getElementById("email").value,
+                telefone: document.getElementById("telefone").value,
+                nascimento: document.getElementById("nascimento").value
+            };
+
+            salvarCadastro(dadosCadastro);
+
+            Swal.fire({
+                title: "Cadastro realizado",
+                text: "Seus dados foram salvos com sucesso.",
+                icon: "success"
+            })
+        }
+        const mensagemFeedback = document.getElementById("mensagem-feedback");
+
+        if (formularioValido) {
+            mensagemFeedback.textContent = "Cadastro validado com sucesso!";
+        } else {
+            mensagemFeedback.textContent = "Por favor, preencha os campos corretamente.";
+        }
+
+        
+
+    });
+
+    form.addEventListener("invalid", () => {
+        const mensagemFeedback = document.getElementById("mensagem-feedback");
+
+        mensagemFeedback.textContent = "Por favor, preencha os campos corretamente.";
+    }, true);
+
+}
+
+function preencherFormulario(dadosCadastro) {
+    if (dadosCadastro) {
+        document.getElementById("nome").value = dadosCadastro.nome;
+        document.getElementById("cpf").value = dadosCadastro.cpf;
+        document.getElementById("email").value = dadosCadastro.email;
+        document.getElementById("telefone").value = dadosCadastro.telefone;
+        document.getElementById("nascimento").value = dadosCadastro.nascimento;
+    }
+}
+
+export { 
+    renderizarFormulario, 
+    configurarEventosFormulario, 
+    preencherFormulario
+};
