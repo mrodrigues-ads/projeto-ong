@@ -8,6 +8,7 @@ const app = document.getElementById("app");
 const menuToggle = document.querySelector(".menu-toggle");
 const menu = document.querySelector("nav ul");
 
+// Controle do menu de navegação com suporte a tecnologias assistivas.
 menuToggle.addEventListener("click", () => {
     menu.classList.toggle("ativo");
 
