@@ -10,6 +10,14 @@ const menu = document.querySelector("nav ul");
 
 menuToggle.addEventListener("click", () => {
     menu.classList.toggle("ativo");
+
+    const menuAberto = menu.classList.contains("ativo");
+
+    menuToggle.setAttribute("aria-expanded", menuAberto);
+    menuToggle.setAttribute(
+        "aria-label",
+        menuAberto ? "Fechar menu" : "Abrir menu"
+    );
 });
 
 function rotear() {

@@ -371,3 +371,10 @@ form fieldset {
 .botao:hover {
     background-color: var(--cor-texto-destaque);
 }
+
+nav a:focus-visible,
+.botao:focus-visible,
+.menu-toggle:focus-visible {
+    outline: 3px solid var(--cor-destaque);
+    outline-offset: 3px;
+}
