@@ -86,7 +86,7 @@ nav a {
 }
 
 nav a:hover {
-    color: var(--cor-destaque);
+    color: var(--cor-texto-destaque);
 }
 
 .menu-toggle {
@@ -197,7 +197,7 @@ main > section {
 }
 
 nav a.ativo {
-    color: var(--cor-destaque);
+    color: var(--cor-texto-destaque);
     border-bottom: 2px solid var(--cor-destaque);
 }
 
@@ -227,10 +227,11 @@ nav ul ul a {
 
 nav ul ul a:hover {
     background-color: var(--cor-texto-destaque);
+    color: var(--cor-fundo-principal)
 }
 
 form button {
-    background-color: var(--cor-principal);
+    background-color: var(--cor-texto-destaque);
     color: var(--cor-fundo-principal);
     border: none;
     padding: 0.75rem 1.5rem;
@@ -359,7 +360,7 @@ form fieldset {
 
 .botao {
     display: inline-block;
-    background-color: var(--cor-principal);
+    background-color: var(--cor-texto-destaque);
     color: var(--cor-fundo-principal);
     padding: var(--espacamento-p) var(--espacamento-m);
     border-radius: 10px;

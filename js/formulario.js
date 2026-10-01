@@ -109,7 +109,7 @@ function renderizarFormulario(app) {
 
             </fieldset>
 
-            <p id="mensagem-feedback"></p>
+            <p id="mensagem-feedback" aria-live="polite"></p>
 
             <button type="submit">Enviar Cadastro</button>
 
