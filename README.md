@@ -11,14 +11,21 @@ O projeto foi desenvolvido de forma incremental ao longo das Experiências Prát
 - **HTML5:** estrutura semântica e conteúdo das páginas.
 - **CSS3:** estilização, layout, responsividade e recursos visuais de acessibilidade.
 - **JavaScript:** interatividade, navegação, validação do formulário e armazenamento local.
+- **Vite:** ferramenta de build utilizada para agrupar e otimizar os arquivos da aplicação para produção.
+- **Node.js e npm:** utilizados para gerenciamento das dependências e execução dos scripts de build e preview.
 - **Git:** controle de versão e organização do histórico de alterações.
 - **GitHub:** hospedagem do repositório, gerenciamento de Issues, Milestones e Pull Requests.
+- **GitHub Actions:** automação do processo de build e deploy da aplicação.
+- **GitHub Pages:** hospedagem da versão de produção da aplicação.
 - **SweetAlert2:** exibição de mensagens de confirmação após o cadastro.
 
 ## Estrutura do projeto
 
 ```text
 projeto-ong/
+├── .github/
+│   └── workflows/
+│       └── deploy.yml
 ├── css/
 │   └── style.css
 ├── html/
@@ -32,15 +39,24 @@ projeto-ong/
 │   ├── formulario.js
 │   ├── main.js
 │   └── rotas.js
-└── README.md
+├── .gitignore
+├── package-lock.json
+├── package.json
+├── README.md
+└── vite.config.mjs
 ```
 
 ### Organização dos arquivos
 
+- **.github/workflows/**: contém o workflow responsável pela automação do build e deploy no GitHub Pages.
 - **css/**: contém os arquivos de estilização do projeto.
 - **html/**: contém as páginas da aplicação.
 - **imagens/**: armazena os recursos visuais utilizados.
 - **js/**: contém os módulos JavaScript responsáveis pela interatividade, navegação, formulário e armazenamento de dados.
+- **.gitignore**: define arquivos e diretórios que não devem ser versionados, como `node_modules/` e `dist/`.
+- **package.json**: contém as configurações do projeto e os scripts utilizados pelo npm.
+- **package-lock.json**: registra as versões das dependências instaladas.
+- **vite.config.mjs**: contém a configuração do Vite para a build de produção.
 - **README.md**: documentação técnica do projeto.
 
 ## Como executar localmente
@@ -50,23 +66,72 @@ projeto-ong/
 Para executar o projeto localmente, é necessário ter:
 
 - **Visual Studio Code** instalado.
+- **Node.js** instalado.
 - Um navegador compatível, como o **Microsoft Edge**.
-- A extensão **Live Server** instalada no Visual Studio Code.
 
-### Execução
+### Instalação
 
 1. Baixe ou clone o repositório do projeto.
 2. Abra a pasta `projeto-ong` no Visual Studio Code.
-3. Acesse a pasta `html/`.
-4. Abra o arquivo `index.html`.
-5. Clique em **Go Live**, disponibilizado pela extensão Live Server.
-6. O projeto será aberto no navegador padrão, permitindo navegar pelas páginas e testar suas funcionalidades.
+3. Abra o terminal na pasta raiz do projeto.
+4. Instale as dependências com:
 
-Também é possível utilizar o navegador integrado ao Visual Studio Code para visualizar o projeto durante o desenvolvimento.
+```bash
+npm install
+```
 
-### Observação
+### Execução local
 
-O projeto é uma aplicação web estática e não possui processo de instalação de dependências ou etapa de build. Os arquivos HTML, CSS e JavaScript são executados diretamente por meio do servidor local.
+Para visualizar a versão de produção da aplicação localmente, execute:
+
+```bash
+npm run build
+
+Depois, utilize:
+
+npm run preview
+
+O Vite disponibilizará um endereço local, normalmente:
+
+http://localhost:4173/
+```
+
+### Build de produção
+
+Para gerar a versão de produção da aplicação, utilize:
+
+```bash
+npm run build
+```
+
+A build será criada na pasta `dist/`.
+
+Para visualizar localmente a versão de produção gerada, execute:
+
+```bash
+npm run preview
+```
+
+O Vite disponibilizará um endereço local, normalmente:
+
+```text
+http://localhost:4173/
+```
+
+### Deploy
+
+A versão publicada da aplicação utiliza **GitHub Pages**. O processo de build e publicação é automatizado pelo **GitHub Actions** sempre que alterações são enviadas para a branch `main`.
+
+O workflow realiza as seguintes etapas:
+
+1. Obtém o código do repositório.
+2. Configura o ambiente Node.js.
+3. Instala as dependências com `npm ci`.
+4. Executa `npm run build`.
+5. Envia a pasta `dist/` como artefato.
+6. Publica a build no GitHub Pages.
+
+Dessa forma, a versão publicada é atualizada automaticamente a partir da branch `main`.
 
 ## Versionamento e práticas de desenvolvimento
 
