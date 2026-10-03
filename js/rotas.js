@@ -1,3 +1,5 @@
+import imagemRedeConectar from "../imagens/rede-conectar.png";
+
 import {
     renderizarFormulario,
     configurarEventosFormulario,
@@ -31,7 +33,7 @@ function carregarInicio(app) {
     app.innerHTML = `
         <section>
             <h2>Quem Somos e o Nosso Propósito</h2>
-            <img src="../imagens/rede-conectar.png" alt="Voluntária da Rede Conectar auxiliando uma mulher idosa a usar um notebook
+            <img src="${imagemRedeConectar}" alt="Voluntária da Rede Conectar auxiliando uma mulher idosa a usar um notebook
             em uma sala com computadores e caixas de doação, com faixa do projeto ao fundo">
             <p>A Rede Conectar é uma organização sem fins lucrativos dedicada a combater a desigualdade através da tecnologia.
                Acreditamos que o acesso ao mundo digital não é um luxo, mas um direito fundamental para o desenvolvimento pessoal, educacional e profissional de cada indivíduo.
